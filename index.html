@@ -9,15 +9,22 @@
     <script src="index.js" defer></script>
 </head>
 <body>
-    <h1>Football team</h1>
+   <header>
+       
+        <!-- nav bar -->
+       <nav>
+          <div  id="navTitle" class="marginleft navTitle"><h3>MySportz</h3></div>
+          <div class="marginleft"><input type="text" id="myInput" placeholder="Enter Full player or team name " onkeyup="searchPlayer()" ></div>
+          <div ><button onclick="showFliterData()" >Search</button></div> 
+        </nav>
+   </header>
     
-    <div>
-    <input type="text" id="myInput" placeholder="Enter player name" onkeyup="searchPlayer()">
-    <button onclick="showFliterData()">Search</button>
-    </div>
-    
-    <div id="football_div" class="main_div">
 
-    </div>
+   <!--  players data -->
+  <section>
+         <h1 id="Maintitle">Football team</h1>
+        <div id="football_div" class="main_div">   
+        </div>
+  </section>
 </body>
 </html>

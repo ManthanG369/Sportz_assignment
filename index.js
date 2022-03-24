@@ -3,7 +3,7 @@ const baseUrl = "https://api.npoint.io/20c1afef1661881ddc9c";
 
 let playerAllData;
 let filterItem;
-
+let SearchText=""
 
 async function allFootballData() {
   let res = await fetch(baseUrl);
@@ -67,7 +67,8 @@ function sortLowToHigh() {
 sortLowToHigh();
 function converTime(t) {
   let [date, time, meridian] = t.split(" ");
-  //   time = +5;
+  // time = time.split(":")
+  time ="05:30:00"
   let res = "Match Time -" + [date, time, meridian].join(" ");
   return res;
 }
@@ -76,9 +77,10 @@ function converTime(t) {
 
 
 function searchPlayer  ()  {
-  let SearchText = document.getElementById("myInput").value;
+   SearchText = document.getElementById("myInput").value;
   console.log("SearchText:", SearchText);
 
+   
    filterItem = playerAllData.filter((item) => {
  
     if (item.PFName == SearchText  || item.TName==SearchText) return item;
@@ -90,6 +92,10 @@ function searchPlayer  ()  {
 };
 
 function showFliterData() {
+
+  if (SearchText.length == 0) {
+    alert("please enter someting");
+  }
   main_div.innerHTML = null;
    displayFootball(filterItem);
 }

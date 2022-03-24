@@ -5,7 +5,7 @@
 }
 
 body{
-    background: #F1F5F8;
+    background-image: url("../player-images/grass.jpg");
 }
 .main_div {
     padding: 1rem;
@@ -31,4 +31,56 @@ body{
 }
 .player_info >div{
     margin: .3rem 0 ;
+}
+
+nav{
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+    height: 50px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: fixed;
+    top: 0;
+    background-color: aliceblue;
+    z-index: 10000;
+}
+
+input{
+    width:400px ;
+    height: 30px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+button{
+    width: 100px;
+    height: 32px;
+    margin: 6px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+      background-color:#002ead;
+      transition: 0.7s;
+  }
+
+#navTitle{
+    margin: .4rem auto;
+    font-size: 25px;
+    
+}
+
+.marginleft{
+    margin-left: auto;
+}
+
+#Maintitle{
+    text-align: center;
+    color:white;
+    font-size: 45px;
+}
+
+section{
+    margin-top: 5rem;
 }
