@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Football</title>
     <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
 </head>
 <body>
     <h1>Football team</h1>
     
     <div>
-    <input type="text">
+    <input type="text" id="myInput" placeholder="Enter player name" onkeyup="searchPlayer()">
+    <button onclick="showFliterData()">Search</button>
     </div>
     
     <div id="football_div" class="main_div">
@@ -19,4 +21,3 @@
     </div>
 </body>
 </html>
-<script src="index.js"></script>

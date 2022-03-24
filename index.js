@@ -1,54 +1,95 @@
-const baseUrl = "https://api.npoint.io/20c1afef1661881ddc9c"
+const baseUrl = "https://api.npoint.io/20c1afef1661881ddc9c";
+
+
+let playerAllData;
+let filterItem;
+
 
 async function allFootballData() {
-    let res = await fetch(baseUrl);
-    let data = await res.json();
-    console.log(data.playerList);
-    let playerAllData = data.playerList;
+  let res = await fetch(baseUrl);
+  let data = await res.json();
+  // console.log(data.playerList);
+     playerAllData = data.playerList;
 
-    //Sort function
-    playerAllData.sort(function(a,b){
-        return a.Value - b.Value;
-    });
+  //Sort function
+  playerAllData.sort(function (a, b) {
+    return a.Value - b.Value;
+  });
 
-    displayFootball(playerAllData)
+  displayFootball(playerAllData);
 }
 
-allFootballData()
-let main_div = document.getElementById("football_div")
+allFootballData();
+let main_div = document.getElementById("football_div");
 
-function displayFootball(allData){
-    allData.forEach((single) =>{
-        let div = document.createElement("div");
-        div.classList.add("player_info")
+function displayFootball(allData) {
+  allData.forEach((single) => {
+    
 
-        let image = document.createElement("img");
-        image.src = "./player-images/" + `${single.Id}` + ".jpg"
 
-        let playName = document.createElement("p");
-        playName.innerText = "Name - " + single.PFName;
+    let image = document.createElement("img");
+    image.src = "./player-images/" + `${single.Id}` + ".jpg";
+    image.alt = single.PFName;
 
-        let skillName = document.createElement("p");
-        skillName.innerText = "Skill - " + single.SkillDesc;
+    let div = document.createElement("div");
+    div.classList.add("player_info");
 
-        let value = document.createElement("p");
-        value.innerText = "Value - " + single.Value;
+    let playName = document.createElement("div");
+    playName.innerText = "Name - " + single.PFName;
 
-        let upcomingMatch = document.createElement("p");
-        upcomingMatch.innerText = `Upcoming Match - ${single.UpComingMatchesList[0].CCode} Vs ${single.UpComingMatchesList[0].VsCCode}`;
+    let skillName = document.createElement("div");
+    skillName.innerText = "Skill - " + single.SkillDesc;
 
-        div.append(image,playName,skillName,value,upcomingMatch)
+    let value = document.createElement("div");
+    value.innerText = "Value - $" + single.Value;
 
-        main_div.appendChild(div)
-    })
+    let upcomingMatch = document.createElement("div");
+    upcomingMatch.innerText = `Upcoming Match - ${single.UpComingMatchesList[0].CCode} VS ${single.UpComingMatchesList[0].VsCCode}`;
+
+    let time = document.createElement("div");
+    time.innerText = converTime(single.UpComingMatchesList[0].MDate);
+
+    single.UpComingMatchesList[0].CCode == ""
+      ? div.append(image, playName, skillName, value)
+      : div.append(image, playName, skillName, value, upcomingMatch, time);
+
+    main_div.appendChild(div);
+  });
 }
 
+function sortLowToHigh() {
+  playerAllData.sort(function (a, b) {
+    return a.Value - b.Value;
+  });
+  displayFootball(playerAllData);
+}
 
-function sortLowToHigh(){
-    playerAllData.sort(function(a,b){
-        return a.Value - b.Value;
-    });
-    displayFootball(playerAllData);
-  }
+sortLowToHigh();
+function converTime(t) {
+  let [date, time, meridian] = t.split(" ");
+  //   time = +5;
+  let res = "Match Time -" + [date, time, meridian].join(" ");
+  return res;
+}
 
-  sortLowToHigh()
+/// Serach by team name
+
+
+function searchPlayer  ()  {
+  let SearchText = document.getElementById("myInput").value;
+  console.log("SearchText:", SearchText);
+
+   filterItem = playerAllData.filter((item) => {
+ 
+    if (item.PFName == SearchText  || item.TName==SearchText) return item;
+    
+  });
+  console.log("filterItem:", filterItem);
+
+  
+};
+
+function showFliterData() {
+  main_div.innerHTML = null;
+   displayFootball(filterItem);
+}
